@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador vCard QR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2A3444">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Generador vCard QR</h1>
+            <p>Selecciona un contacto o introduce los datos para crear un código QR con su vCard.</p>
+        </header>
+
+        <main>
+            <button id="select-contact-btn" class="btn">Elegir Contacto</button>
+            
+            <div id="manual-form-container" class="hidden">
+                <form id="manual-form">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Teléfono</label>
+                        <input type="tel" id="tel" name="tel">
+                    </div>
+                    <button type="submit" class="btn">Generar QR</button>
+                </form>
+            </div>
+
+            <div id="qr-code-container"></div>
+            <p id="status-message"></p>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => console.log('Service Worker registrado con éxito:', registration))
+                    .catch(error => console.log('Error al registrar el Service Worker:', error));
+            });
+        }
+    </script>
+
+</body>
+</html>
